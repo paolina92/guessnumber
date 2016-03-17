@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="guessNumberApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Number to Guess</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="lib/angular.min.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body>
+	<div ng-controller="playCtrl">
+		<div class="alert alert-success" role="alert">
+			<div ng-show="!userWin" class="comment">Guess a number between 1 and 999:</div>
+			<div ng-show="userWin" class="result">
+				<div class="title">Congratulations!</div>
+				<div><strong>Number of guesses</strong>: {{nbOfGuesses}} / <strong>Time spent</strong>: {{time}}</div>
+			</div>
+		</div>
+		<div class="game-content">
+			<div class="row">
+				<div class="col-xs-6 col-md-2">
+		  			<div class="form-group">
+		    			<input type="number" class="form-control" placeholder="Number to guess" ng-model="guessedNb" ng-focus="initValues()">
+		    		</div>
+		    	</div>
+		    	<div class="col-xs-6 col-md-2">
+		    		<button type="submit" class="btn btn-default" ng-click="submitNumber()">Submit</button>
+		    	</div>
+		    	<div class="col-xs-12 col-md-8">
+		    		<ul ng-show="guessedNbList.length">
+		    			<li ng-repeat="nb in guessedNbList | limitTo:-5 | orderBy:'time':true"><span ng-bind="nb.val"></span><span ng-bind="nb.compare"></span></li>
+		    		</ul>
+		    	</div>
+	    	</div>
+	    </div>
+	</div>
+</body>
+</html>
